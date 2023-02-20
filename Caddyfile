@@ -1,0 +1,11 @@
+:{$ROOT_PORT} {
+	handle /api/* {
+		reverse_proxy :{$SERVER_PORT}
+	}
+
+	handle {
+		root * {system.wd}{system.slash}client{system.slash}dist
+		try_files {path} /index.html
+		file_server
+	}
+}

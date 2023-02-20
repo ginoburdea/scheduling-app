@@ -1,0 +1,24 @@
+{
+    "name": "scheduling-app",
+    "version": "0.1.0",
+    "type": "module",
+    "license": "MIT",
+    "scripts": {
+        "setupEnv": "dotenv -e .env -e client/.env -e server/.env",
+        "dev": "npm run setupEnv -- concurrently --kill-others --prefix-colors cyan,blue --names client,server \"cd client && npm run dev\" \"cd server && npm run dev -- --preserveWatchOutput\"",
+        "build": "npm run setupEnv -- concurrently --prefix-colors cyan,blue --names client,server \"cd client && npm run build\" \"cd server && npm run build\"",
+        "preview": "npm run setupEnv -- concurrently --kill-others --prefix-colors cyan,blue --names client,server \"cd client && npm run preview\" \"cd server && npm run prod\"",
+        "prod:first": "npm run setupEnv -- caddy adapt && caddy start && pm2 start server/dist/main.js -i 0",
+        "prod": "npm run setupEnv -- caddy reload && pm2 del all && pm2 start server/dist/main.js -i 0"
+    },
+    "devDependencies": {
+        "concurrently": "^7.6.0",
+        "cross-env": "^7.0.3",
+        "dotenv-cli": "^7.0.0",
+        "pm2": "^5.2.2"
+    },
+    "dependencies": {
+        "dotenv": "^16.0.3",
+        "inquirer": "^9.1.4"
+    }
+}
