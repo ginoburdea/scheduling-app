@@ -1,32 +1,17 @@
 ## Installation
 
 ```bash
+# Make sure you have github ssh set up
 # Clone the repository and its submodules
-$ git clone --recurse-submodules https://github.com/ginoburdea/scheduling-app.git
+$ git clone --recurse-submodules git@github.com:ginoburdea/scheduling-app.git
 
-# Run the installation script
-# Linux & Mac
-$ ./install.sh
+# Set all required env variables
+# You can find examples in .env.example, client/.env.example and server/.env.example
 
-# Windows
-$ bash install.sh
-```
+# Make sure you have the following ssl certificates inside client/certificates:
+# - certificate.crt (certificate.crt and ca_bundle.crt combined)
+# - private.key
 
-## Running the app
-
-```bash
-# development mode
-$ npm run dev
-
-# build for production
-$ npm run build
-
-# preview the production build
-$ npm run preview
-
-# production mode (first time when starting the apps)
-$ npm run prod:first
-
-# production mode
-$ npm run prod
+# Start the applications
+$ docker compose up --build --detached
 ```
